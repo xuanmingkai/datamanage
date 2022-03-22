@@ -1,94 +1,94 @@
-import { authHeader } from './AuthHeader'
+import { authHeader } from "./AuthHeader";
 
 export const userService = {
-	login,
-	logout,
-	register,
-	getAll,
-	getById,
-	update,
-	delete: _delete
-}
+  login,
+  logout,
+  register,
+  getAll,
+  getById,
+  update,
+  delete: _delete,
+};
 
 function login(username, password) {
-	const requestOptions = {
-		method: 'POST',
-		headers: {'Content-Type':'application/json'},
-		body: JSON.stringify({username, password})
-	}
+  const requestOptions = {
+    method: "POST",
+    headers: { "Content-Type": "application/json" },
+    body: JSON.stringify({ username, password }),
+  };
 
-	return fetch(`/users/authenticate`, requestOptions)
-		.then(handleResponse)
-		.then(user => {
-			localStorage.setItem('user', JSON.stringify(user))
-			return user
-		})
+  return fetch(`/users/authenticate`, requestOptions)
+    .then(handleResponse)
+    .then((user) => {
+      localStorage.setItem("user", JSON.stringify(user));
+      return user;
+    });
 }
 
 function logout() {
-	localStorage.removeItem('user')
+  localStorage.removeItem("user");
 }
 
 function getAll() {
-	const requestOptions = {
-		method: 'GET',
-		headers: authHeader()
-	}
+  const requestOptions = {
+    method: "GET",
+    headers: authHeader(),
+  };
 
-	return fetch(`/users`, requestOptions).then(handleResponse)
+  return fetch(`/users`, requestOptions).then(handleResponse);
 }
 
 function getById(id) {
-	const requestOptions = {
-		method: 'GET',
-		headers: authHeader()
-	}
+  const requestOptions = {
+    method: "GET",
+    headers: authHeader(),
+  };
 
-	return fetch(`/user/${id}`, requestOptions).then(handleResponse)
+  return fetch(`/user/${id}`, requestOptions).then(handleResponse);
 }
 
 function register(user) {
-	const requestOptions = {
-		method: 'POST',
-		headers: { 'Content-Type': 'application/json' },
-		body: JSON.stringify(user)
-	}
+  const requestOptions = {
+    method: "POST",
+    headers: { "Content-Type": "application/json" },
+    body: JSON.stringify(user),
+  };
 
-	return fetch(`/users/register`, requestOptions).then(handleResponse)
+  return fetch(`/users/register`, requestOptions).then(handleResponse);
 }
 
 function update(user) {
-	const requestOptions = {
-		method: 'PUT',
-		headers: {...authHeader(), 'Content-Type':'application/json' },
-		body: JSON.stringify(user)
-	}
+  const requestOptions = {
+    method: "PUT",
+    headers: { ...authHeader(), "Content-Type": "application/json" },
+    body: JSON.stringify(user),
+  };
 
-	return fetch(`/users/${user.id}`, requestOptions).then(handleResponse)
+  return fetch(`/users/${user.id}`, requestOptions).then(handleResponse);
 }
 
 function _delete(id) {
-	const requestOptions = {
-		method: 'DELETE',
-		headers: authHeader()
-	}
-	return fetch(`/users/${id}`, requestOptions).then(handleResponse)
+  const requestOptions = {
+    method: "DELETE",
+    headers: authHeader(),
+  };
+  return fetch(`/users/${id}`, requestOptions).then(handleResponse);
 }
 
 function handleResponse(response) {
-	return response.text().then(text => {
-		const data = text && JSON.parse(text)
-		if (!response.ok) {
-			if (response.status === 401) {
-				logout()
-				// eslint-disable-next-line no-restricted-globals
-				location.reload(true)
-			}
+  return response.text().then((text) => {
+    const data = text && JSON.parse(text);
+    if (!response.ok) {
+      if (response.status === 401) {
+        logout();
+        // eslint-disable-next-line no-restricted-globals
+        location.reload(true);
+      }
 
-			const error = (data && data.message ) || response.statusText
-			return Promise.reject(error)
-		}
+      const error = (data && data.message) || response.statusText;
+      return Promise.reject(error);
+    }
 
-		return data
-	})
+    return data;
+  });
 }
