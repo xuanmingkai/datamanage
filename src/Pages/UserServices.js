@@ -1,4 +1,5 @@
 import { authHeader } from "./AuthHeader";
+import { config } from "./AppConfig";
 
 export const userService = {
   login,
@@ -17,7 +18,7 @@ function login(username, password) {
     body: JSON.stringify({ username, password }),
   };
 
-  return fetch(`/users/authenticate`, requestOptions)
+  return fetch(`${config.apiUrl}/users/authenticate`, requestOptions)
     .then(handleResponse)
     .then((user) => {
       localStorage.setItem("user", JSON.stringify(user));
@@ -35,7 +36,7 @@ function getAll() {
     headers: authHeader(),
   };
 
-  return fetch(`/users`, requestOptions).then(handleResponse);
+  return fetch(`${config.appUrl}/users`, requestOptions).then(handleResponse);
 }
 
 function getById(id) {
@@ -44,7 +45,7 @@ function getById(id) {
     headers: authHeader(),
   };
 
-  return fetch(`/user/${id}`, requestOptions).then(handleResponse);
+  return fetch(`${config.appUrl}/user/${id}`, requestOptions).then(handleResponse);
 }
 
 function register(user) {
@@ -54,7 +55,7 @@ function register(user) {
     body: JSON.stringify(user),
   };
 
-  return fetch(`/users/register`, requestOptions).then(handleResponse);
+  return fetch(`${config.appUrl}/users/register`, requestOptions).then(handleResponse);
 }
 
 function update(user) {
@@ -64,7 +65,7 @@ function update(user) {
     body: JSON.stringify(user),
   };
 
-  return fetch(`/users/${user.id}`, requestOptions).then(handleResponse);
+  return fetch(`${config.appUrl}/users/${user.id}`, requestOptions).then(handleResponse);
 }
 
 function _delete(id) {
@@ -72,7 +73,7 @@ function _delete(id) {
     method: "DELETE",
     headers: authHeader(),
   };
-  return fetch(`/users/${id}`, requestOptions).then(handleResponse);
+  return fetch(`${config.appUrl}/users/${id}`, requestOptions).then(handleResponse);
 }
 
 function handleResponse(response) {
