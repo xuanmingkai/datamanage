@@ -174,7 +174,7 @@ const DashboardContent = () => {
   );
 };
 
-function mapState(state) {}
+function mapState(state) {return {}}
 
 const actionCreators = {};
 
