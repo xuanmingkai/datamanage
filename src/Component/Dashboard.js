@@ -21,6 +21,7 @@ import Grid from "@mui/material/Grid";
 import Paper from "@mui/material/Paper";
 import Chart from "../Pages/Chart";
 import { PageTable } from "../Pages/PageTable";
+import { Import } from "./Import"
 import Button from "@mui/material/Button"
 
 const drawerWidth = 240;
@@ -106,7 +107,7 @@ const DashboardContent = () => {
               noWrap
               sx={{ flexGrow: 1 }}
             >
-              Dashboard
+              DataBase Management Platform
             </Typography>
             <IconButton color="inherit">
               <Badge badgeContent={4} color="secondary">
@@ -152,10 +153,11 @@ const DashboardContent = () => {
         >
           <Toolbar />
           <Container maxWidth="lg" sx={{ mt: 4, mb: 4 }}>
-            <Grid container spacing={3}>
+                {/* {<PageTable />} */}
+                {<Import />}
+            {/* <Grid container spacing={3}>
               <Grid item xs={12} md={8} lg={12}>
-                <PageTable />
-                {/* <Paper
+                <Paper
                   sx={{
                     p: 2,
                     display: "flex",
@@ -164,9 +166,9 @@ const DashboardContent = () => {
                   }}
                 >
                   <Chart />
-                </Paper> */}
+                </Paper>
               </Grid>
-            </Grid>
+            </Grid> */}
           </Container>
         </Box>
       </Box>
