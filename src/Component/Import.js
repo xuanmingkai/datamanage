@@ -1,39 +1,53 @@
 import * as React from "react";
 import { connect } from "react-redux";
 import CssBaseline from "@mui/material/CssBaseline";
-import Container from "@mui/material/Container";
-import Typography from "@mui/material/Typography";
 import Paper from "@mui/material/Paper";
-import Box from "@mui/material/Box";
+import Typography from "@mui/material/Typography";
+import Button from "@mui/material/Button";
 
 const ImportContent = () => {
+  const [files, setFiles] = React.useState([]);
+
+  const uploadHandler = (event) => {
+    const select_files = event.target.files;
+    console.log(select_files);
+    setFiles(select_files);
+  };
+
   return (
     <React.Fragment>
       <CssBaseline />
-          <Box
-            sx={{
-              display: "flex",
-              flexwrap: "wrap",
-              "& > :not(style)": {
-                ml: 23,
-                width: 600,
-                height: 300,
-                color: "blue",
-                border: '1px dashed grey',
-                bgcolor: '#EDF2F7',
-                // justifyContent: 'center',
-                // alignItems: 'center',
-                padding: '1em',
-                flexDirection: 'column',
-              },
-            }}
-          >
-            <Paper elevation={3}>
-              <Typography  >UpLoad Files</Typography>
-              <Typography  component="p">Support Files</Typography>
-              <Typography component="p">CSV, XML, JSON</Typography>
-            </Paper>
-          </Box>
+      <Typography align="center">Upload Files</Typography>
+      <Paper
+        sx={{
+          mx: "auto",
+          p: 2,
+          display: "flex",
+          flexDirection: "column",
+          minWidth: 240,
+          minHeight: 240,
+          width: 550,
+          alignItems: "center",
+          backgroundColor: "#edf2f7",
+          border: 1,
+          justifyContent: "center",
+        }}
+      >
+        <label htmlFor="contained-button-file">
+          <input
+            onChange={uploadHandler}
+            style={{ display: "none" }}
+            id="contained-button-file"
+            multiple
+            type="file"
+          />
+          <Button variant="contained" component="span">
+            Upload
+          </Button>
+        </label>
+        <Typography>Support Files.</Typography>
+        <Typography>ZIP, CSV, XML.</Typography>
+      </Paper>
     </React.Fragment>
   );
 };
