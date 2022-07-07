@@ -73,7 +73,7 @@ const Drawer = styled(MuiDrawer, {
 const mdTheme = createTheme();
 
 const DashboardContent = () => {
-  const [open, setOpen] = React.useState(true);
+  const [open, setOpen] = React.useState(false);
   const toggleDrawer = () => {
     setOpen(!open);
   };
@@ -176,9 +176,4 @@ const DashboardContent = () => {
   );
 };
 
-function mapState(state) {return {}}
-
-const actionCreators = {};
-
-const connectedDashboard = connect(mapState, actionCreators)(DashboardContent);
-export { connectedDashboard as Dashboard };
+export { DashboardContent as Dashboard };
