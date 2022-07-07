@@ -1,18 +1,58 @@
 import * as React from "react";
-import { connect } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import CssBaseline from "@mui/material/CssBaseline";
 import Paper from "@mui/material/Paper";
 import Typography from "@mui/material/Typography";
 import Button from "@mui/material/Button";
+import { ImportFilesActions } from "../Pages/ImportFilesActions";
 
 const ImportContent = () => {
+  const im_processing = useSelector((state) => state.importfiles.processing);
+  const im_result = useSelector((state) => state.importfiles.result);
+  const im_duration = useSelector((state) => state.importfiles.duration)
+  const im_content = useSelector((state) => state.importfiles.content)
+
+  const dispatch = useDispatch();
+
   const [files, setFiles] = React.useState([]);
 
   const uploadHandler = (event) => {
     const select_files = event.target.files;
-    console.log(select_files);
-    setFiles(select_files);
+    var importfiles = [];
+
+    for (const key in select_files) {
+      if (select_files.hasOwnProperty(key)) {
+        importfiles.push(select_files[key]);
+      }
+    }
+    setFiles(importfiles);
   };
+
+  React.useEffect(() => {
+    if (files.length > 0) {
+      dispatch(ImportFilesActions.parse(files));
+    }
+    return () => {};
+  }, [dispatch, files]);
+
+  React.useEffect(() => {
+    if (im_processing === true) {
+      // console.log("Parsed file is processing...");
+    }
+  }, [im_processing]);
+
+  React.useEffect(() => {
+    if (im_result === true) {
+      console.log("duration: " + im_duration + "ms")
+      im_content.forEach((item) => {
+        item.content.then(result => {
+          console.log(item.filename)
+          console.log(result)
+        })
+      })
+      
+    }
+  }, [im_result, im_duration, im_content]);
 
   return (
     <React.Fragment>
@@ -52,11 +92,4 @@ const ImportContent = () => {
   );
 };
 
-function mapStatetoProps(state) {
-  return {};
-}
-
-const actionCreators = {};
-
-const connectedImport = connect(mapStatetoProps, actionCreators)(ImportContent);
-export { connectedImport as Import };
+export { ImportContent as Import };
