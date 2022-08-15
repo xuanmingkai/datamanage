@@ -2,9 +2,8 @@ import React, { useEffect, useState } from "react";
 
 import { Grid } from "@mui/material";
 
-import { gridSpacing } from "../../../store/constant";
-import EarningCard from './EarningCard'
-import TotalOrderLineChartCard from './TotalOrderLineChartCard'
+import { gridSpacing, NodeTypes } from "../../../store/constant";
+import NodeTypeChartCard from './NodeTypeChartCard'
 
 const Dashboard = () => {
   const [isLoading, setLoading] = useState(true);
@@ -15,11 +14,17 @@ const Dashboard = () => {
     <Grid container spacing={gridSpacing}>
       <Grid item xs={12}>
         <Grid container spacing={gridSpacing}>
-          <Grid item lg={4} md={6} sm={6} xs={12}>
-            <EarningCard isLoading={isLoading} />
+          <Grid item lg={3} md={6} sm={6} xs={12}>
+            <NodeTypeChartCard isLoading={isLoading} NodeType={NodeTypes.PC}/>
           </Grid>
-          <Grid item lg={4} md={6} sm={6} xs={12}>
-            <TotalOrderLineChartCard isLoading={isLoading} />
+          <Grid item lg={3} md={6} sm={6} xs={12}>
+            <NodeTypeChartCard isLoading={isLoading} NodeType={NodeTypes.Camera}/>
+          </Grid>
+          <Grid item lg={3} md={6} sm={6} xs={12}>
+            <NodeTypeChartCard isLoading={isLoading} NodeType={NodeTypes.Router}/>
+          </Grid>
+          <Grid item lg={3} md={6} sm={6} xs={12}>
+            <NodeTypeChartCard isLoading={isLoading} NodeType={NodeTypes.Server}/>
           </Grid>
         </Grid>
       </Grid>
