@@ -14,7 +14,6 @@ const headerSX = {
   "& .MuiCardHeader-action": { mr: 0 },
 };
 
-// eslint-disable-next-line react/display-name
 const MainCard = forwardRef(
   (
     {
@@ -75,6 +74,7 @@ const MainCard = forwardRef(
     );
   }
 );
+MainCard.displayName = "MainCard"
 
 MainCard.propTypes = {
   border: PropTypes.bool,
