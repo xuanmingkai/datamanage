@@ -12,7 +12,7 @@ const SamplePage = Loadable(lazy(() => import('../views/sample-page')))
 const WorkerImport = Loadable(lazy(() => import('../views/worker/Import')))
 
 const MainRoutes = {
-  paht: "/",
+  path: "/",
   element: <MainLayout />,
   children: [
     {
