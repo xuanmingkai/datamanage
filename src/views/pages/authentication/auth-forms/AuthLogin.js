@@ -1,5 +1,7 @@
 /* eslint-disable no-unused-vars */
 import React, { useState } from "react";
+import { useDispatch, useSelector } from "react-redux";
+import { Navigate } from "react-router-dom";
 
 import {
   Box,
@@ -25,15 +27,20 @@ import { Formik } from "formik";
 import useScriptRef from "../../../../utils/hooks/useScriptRef";
 import AnimateButton from "../../../../ui-component/extended/AnimateButton";
 // import LoginGoogle from "./LoginGoogle";
+import { userActions } from "../../../../services/user/UserActions";
+import config from "../../../../config";
 
 const FirebaseLogin = () => {
   const theme = useTheme();
 
   const scriptedRef = useScriptRef();
+  const dispatch = useDispatch();
   //   const matchDownSM = useMediaQuery(theme.breakpoints.down("md"));
-  //   const customization = useSelector((state) => state.customization);
+  const loggingIn = useSelector((state) => state.authentication.loggingIn);
+  const loggedIn = useSelector((state) => state.authentication.loggedIn);
   const [showPassword, setShowPassword] = useState(false);
   const [checked, setChecked] = useState(true);
+  const [user, setUser] = useState({});
 
   const handleClickShowPassword = () => {
     setShowPassword(!showPassword);
@@ -42,20 +49,35 @@ const FirebaseLogin = () => {
     event.preventDefault();
   };
 
+  const handleSubmit = (event) => {
+    event.preventDefault();
+    console.log("submit");
+    user.username = event.target.username.value;
+    user.password = event.target.password.value;
+    setUser(user);
+    dispatch(userActions.login(user));
+  };
+
   return (
     <>
       {/* <LoginGoogle /> */}
+      <Box>
+        {loggingIn && (
+          <img
+            alt="Img"
+            src="data:image/gif;base64,R0lGODlhEAAQAPIAAP///wAAAMLCwkJCQgAAAGJiYoKCgpKSkiH/C05FVFNDQVBFMi4wAwEAAAAh/hpDcmVhdGVkIHdpdGggYWpheGxvYWQuaW5mbwAh+QQJCgAAACwAAAAAEAAQAAADMwi63P4wyklrE2MIOggZnAdOmGYJRbExwroUmcG2LmDEwnHQLVsYOd2mBzkYDAdKa+dIAAAh+QQJCgAAACwAAAAAEAAQAAADNAi63P5OjCEgG4QMu7DmikRxQlFUYDEZIGBMRVsaqHwctXXf7WEYB4Ag1xjihkMZsiUkKhIAIfkECQoAAAAsAAAAABAAEAAAAzYIujIjK8pByJDMlFYvBoVjHA70GU7xSUJhmKtwHPAKzLO9HMaoKwJZ7Rf8AYPDDzKpZBqfvwQAIfkECQoAAAAsAAAAABAAEAAAAzMIumIlK8oyhpHsnFZfhYumCYUhDAQxRIdhHBGqRoKw0R8DYlJd8z0fMDgsGo/IpHI5TAAAIfkECQoAAAAsAAAAABAAEAAAAzIIunInK0rnZBTwGPNMgQwmdsNgXGJUlIWEuR5oWUIpz8pAEAMe6TwfwyYsGo/IpFKSAAAh+QQJCgAAACwAAAAAEAAQAAADMwi6IMKQORfjdOe82p4wGccc4CEuQradylesojEMBgsUc2G7sDX3lQGBMLAJibufbSlKAAAh+QQJCgAAACwAAAAAEAAQAAADMgi63P7wCRHZnFVdmgHu2nFwlWCI3WGc3TSWhUFGxTAUkGCbtgENBMJAEJsxgMLWzpEAACH5BAkKAAAALAAAAAAQABAAAAMyCLrc/jDKSatlQtScKdceCAjDII7HcQ4EMTCpyrCuUBjCYRgHVtqlAiB1YhiCnlsRkAAAOwAAAAAAAAAAAA=="
+          />
+        )}
+        {loggedIn && <Navigate to={config.defaultPath} replace={true} />}
+      </Box>
       <Formik
         initialValues={{
-          email: "info@example.com",
-          password: "123456",
+          username: "",
+          password: "",
           submit: null,
         }}
         validationSchema={Yup.object().shape({
-          email: Yup.string()
-            .email("Must be a vaild mail")
-            .max(255)
-            .required("Email is required"),
+          username: Yup.string().max(15).required("Username is required"),
           password: Yup.string().max(255).required("Password is required"),
         })}
         onSubmit={async (values, { setErrors, setStatus, setSubmitting }) => {
@@ -78,7 +100,6 @@ const FirebaseLogin = () => {
           errors,
           handleBlur,
           handleChange,
-          handleSubmit,
           isSubmitting,
           touched,
           values,
@@ -89,25 +110,25 @@ const FirebaseLogin = () => {
               error={Boolean(touched.mail && errors.email)}
               sx={{ ...theme.typography.customInput }}
             >
-              <InputLabel htmlFor="outlined-adornment-email-login">
-                Email Address / Username
+              <InputLabel htmlFor="outlined-adornment-usename-login">
+                Username
               </InputLabel>
               <OutlinedInput
-                id="outlined-adornment-email-login"
-                type="email"
-                value={values.email}
-                name="email"
+                id="outlined-adornment-username-login"
+                type="text"
+                value={values.username}
+                name="username"
                 onBlur={handleBlur}
                 onChange={handleChange}
-                label="Email Address / Username"
+                label="Username"
                 inputProps={{}}
               />
-              {touched.email && errors.email && (
+              {touched.username && errors.username && (
                 <FormHelperText
                   error
-                  id="standard-weight-helper-text-email-login"
+                  id="standard-weight-helper-text-username-login"
                 >
-                  {errors.email}
+                  {errors.username}
                 </FormHelperText>
               )}
             </FormControl>
@@ -182,7 +203,6 @@ const FirebaseLogin = () => {
                 <FormHelperText error>{errors.submit}</FormHelperText>
               </Box>
             )}
-
             <Box sx={{ mt: 2 }}>
               <AnimateButton>
                 <Button
@@ -193,7 +213,9 @@ const FirebaseLogin = () => {
                   type="submit"
                   variant="contained"
                   color="secondary"
-                >Sign in</Button>
+                >
+                  Sign in
+                </Button>
               </AnimateButton>
             </Box>
           </form>

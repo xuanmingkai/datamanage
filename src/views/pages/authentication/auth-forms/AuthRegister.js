@@ -1,5 +1,6 @@
 import React, { useState } from "react";
 import { Link } from "react-router-dom";
+import { useDispatch, useSelector } from "react-redux";
 
 import {
   Box,
@@ -30,17 +31,21 @@ import {
   strengthColor,
   strengthIndicator,
 } from "../../../../utils/password-strength";
+import { userActions } from "../../../../services/user/UserActions";
 // import RegisterGoogle from "./RegisterGoogle";
 
 const FirebaseRegister = ({ ...others }) => {
   const theme = useTheme();
   const scriptedRef = useScriptRef();
   const matchDownSM = useMediaQuery(theme.breakpoints.down("md"));
+  const dispatch = useDispatch();
 
   const [showPassword, setShowPassword] = useState(false);
   const [strength, setStrength] = useState(0);
   const [level, setLevel] = useState();
   const [checked, setChecked] = useState(true);
+  const [user, setUser] = useState({});
+  const registered = useSelector((state) => state.registeration.registered);
 
   const handleClickShowPassword = () => {
     setShowPassword(!showPassword);
@@ -52,20 +57,38 @@ const FirebaseRegister = ({ ...others }) => {
     setLevel(strengthColor(temp));
   };
 
+  const handleSubmit = (event) => {
+    event.preventDefault();
+    console.log("submit...");
+    user.firstName = event.target.fname.value;
+    user.lastName = event.target.lname.value;
+    user.email = event.target.email.value;
+    user.username = event.target.username.value;
+    user.password = event.target.password.value;
+    setUser(user);
+    if (checked && user.username && user.password) {
+      console.log(user);
+      dispatch(userActions.register(user));
+    }
+  };
+
   return (
     <>
       {/* <RegisterGoogle /> */}
       <Formik
         initialValues={{
+          fname: "",
+          lname: "",
           email: "",
+          username: "",
           password: "",
           submit: null,
         }}
         validationSchema={Yup.object().shape({
-          email: Yup.string()
-            .email("Must be a vaild email")
-            .max(255)
-            .required("Email is required"),
+          fname: Yup.string().max(15, "Must be 15 characters or less"),
+          lname: Yup.string().max(15, "Must be 15 characters or less"),
+          email: Yup.string().email("Must be a vaild email").max(255),
+          username: Yup.string().max(15).required("Username is Requireed"),
           password: Yup.string().max(255).required("Password is required"),
         })}
         onSubmit={async (values, { setErrors, setStatus, setSubmitting }) => {
@@ -88,7 +111,6 @@ const FirebaseRegister = ({ ...others }) => {
           errors,
           handleBlur,
           handleChange,
-          handleSubmit,
           isSubmitting,
           touched,
           values,
@@ -124,7 +146,7 @@ const FirebaseRegister = ({ ...others }) => {
               sx={{ ...theme.typography.customInput }}
             >
               <InputLabel htmlFor="outlined-adornment-email-register">
-                Email Address / Username
+                Email Address
               </InputLabel>
               <OutlinedInput
                 id="outlined-adornment-email-register"
@@ -144,6 +166,32 @@ const FirebaseRegister = ({ ...others }) => {
               )}
             </FormControl>
 
+            <FormControl
+              fullWidth
+              error={Boolean(touched.username && errors.username)}
+              sx={{ ...theme.typography.customInput }}
+            >
+              <InputLabel htmlFor="outlined-adornment-username-register">
+                Username
+              </InputLabel>
+              <OutlinedInput
+                id="outlined-adornment-username-register"
+                type="text"
+                value={values.username}
+                name="username"
+                onBlur={handleBlur}
+                onChange={handleChange}
+              />
+              {touched.username && errors.username && (
+                <FormHelperText
+                  error
+                  id="standard-weight-helper-text--register"
+                >
+                  {errors.username}
+                </FormHelperText>
+              )}
+              {!registered && <div>aaa</div>}
+            </FormControl>
             <FormControl
               fullWidth
               error={Boolean(touched.password && errors.password)}
@@ -221,7 +269,7 @@ const FirebaseRegister = ({ ...others }) => {
                   }
                   label={
                     <Typography variant="subtitle1">
-                      Agree with &nbsp
+                      Agree with &nbsp;
                       <Typography variant="subtitle1" component={Link} to="#">
                         Terms & Condition.
                       </Typography>

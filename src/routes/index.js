@@ -5,7 +5,7 @@ import AuthenticationRoutes from "./AuthenticationRoutes";
 import DefaultRoute from "./DefaultRoute";
 
 const ThemeRoutes = () => {
-  const isAuth = false
+  const isAuth = localStorage.getItem("user")
   return isAuth ? 
   useRoutes([MainRoutes, AuthenticationRoutes]):
   useRoutes([DefaultRoute, AuthenticationRoutes])
