@@ -35,9 +35,9 @@ function login(username, password) {
   }
 }
 
-function logout() {
+function logout(dispatch) {
+  dispatch({ type: userConstants.LOGOUT });
   userService.logout();
-  return { type: userConstants.LOGOUT };
 }
 
 function register(user) {
