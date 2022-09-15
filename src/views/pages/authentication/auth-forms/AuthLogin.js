@@ -51,11 +51,10 @@ const FirebaseLogin = () => {
 
   const handleSubmit = (event) => {
     event.preventDefault();
-    console.log("submit");
     user.username = event.target.username.value;
     user.password = event.target.password.value;
     setUser(user);
-    dispatch(userActions.login(user));
+    dispatch(userActions.login(user.username, user.password));
   };
 
   return (
