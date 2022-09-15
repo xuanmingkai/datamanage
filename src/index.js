@@ -9,6 +9,8 @@ import config from './config'
 import './assets/scss/style.scss'
 
 import reportWebVitals from "./reportWebVitals";
+import { configureFakeBackend} from './services/backend/FakeBackend'
+configureFakeBackend()
 
 const root = ReactDOM.createRoot(document.getElementById("root"));
 root.render(
