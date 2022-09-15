@@ -197,7 +197,7 @@ const ProfileSection = () => {
                               <Grid
                                 item
                                 container
-                                alignItem="center"
+                                alignItems="center"
                                 justifyContent="space-between"
                               >
                                 <Grid item>
