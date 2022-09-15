@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import { Link } from "react-router-dom";
+import { Link, Navigate } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
 
 import {
@@ -190,7 +190,7 @@ const FirebaseRegister = ({ ...others }) => {
                   {errors.username}
                 </FormHelperText>
               )}
-              {!registered && <div>aaa</div>}
+              {registered && <Navigate to='/' replace={true} />}
             </FormControl>
             <FormControl
               fullWidth
