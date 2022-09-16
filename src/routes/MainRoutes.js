@@ -8,7 +8,7 @@ const DashboardDefault = Loadable(lazy(() => import('../views/dashboard/Default'
 const UtilsTypography = Loadable(lazy(() => import('../views/utilities/Typography')))
 const UtilsTablerIcons = Loadable(lazy(() => import('../views/utilities/TablerIcons')))
 
-const WorkerImport = Loadable(lazy(() => import('../views/worker/Import')))
+const ImportFile = Loadable(lazy(() => import('../views/pages/interface/ImportFile')))
 
 const MainRoutes = {
   path: "/",
@@ -28,11 +28,11 @@ const MainRoutes = {
       ],
     },
     {
-      path: "worker",
+      path: "pages",
       children: [
         {
-          path: "worker-import",
-          element: <WorkerImport />,
+          path: "import-file",
+          element: <ImportFile />,
         }
       ],
     },

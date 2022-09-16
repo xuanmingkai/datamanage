@@ -4,9 +4,9 @@ import CssBaseline from "@mui/material/CssBaseline";
 import Paper from "@mui/material/Paper";
 import Typography from "@mui/material/Typography";
 import Button from "@mui/material/Button";
-import { ImportFilesActions } from "../../services/import/ImportFilesActions";
+import { ImportFilesActions } from "../../../services/import/ImportFilesActions";
 
-const Import = () => {
+const ImportFile = () => {
   const im_processing = useSelector((state) => state.importfiles.processing);
   const im_result = useSelector((state) => state.importfiles.result);
   const im_duration = useSelector((state) => state.importfiles.duration)
@@ -93,4 +93,4 @@ const Import = () => {
   );
 };
 
-export default Import
+export default ImportFile
