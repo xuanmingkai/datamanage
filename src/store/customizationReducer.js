@@ -7,6 +7,7 @@ export const initialState = {
   fontFamily: config.fontFamily,
   borderRadius: config.borderRadius,
   opened: true,
+  statusTimer: false,
 };
 
 const customizationReducer = (state = initialState, action) => {
@@ -32,6 +33,11 @@ const customizationReducer = (state = initialState, action) => {
       return {
         ...state,
         borderRadius: action.borderRadius,
+      };
+    case actionTypes.STATUS_TIMER:
+      return {
+        ...state,
+        statusTimer: action.statusTimer,
       };
     default:
       return state;
