@@ -8,7 +8,6 @@ const DashboardDefault = Loadable(lazy(() => import('../views/dashboard/Default'
 const UtilsTypography = Loadable(lazy(() => import('../views/utilities/Typography')))
 const UtilsTablerIcons = Loadable(lazy(() => import('../views/utilities/TablerIcons')))
 
-const SamplePage = Loadable(lazy(() => import('../views/sample-page')))
 const WorkerImport = Loadable(lazy(() => import('../views/worker/Import')))
 
 const MainRoutes = {
@@ -54,10 +53,6 @@ const MainRoutes = {
           element: <UtilsTablerIcons />,
         },
       ],
-    },
-    {
-      path: "sample-page",
-      element: <SamplePage />,
     },
   ],
 };
