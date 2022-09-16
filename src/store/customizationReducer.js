@@ -1,12 +1,12 @@
 import config from "../config";
 
-import * as actionTypes from "./actions";
+import { actionTypes } from "./constant";
 
 export const initialState = {
   isOpen: [],
   fontFamily: config.fontFamily,
   borderRadius: config.borderRadius,
-  opened: true
+  opened: true,
 };
 
 const customizationReducer = (state = initialState, action) => {

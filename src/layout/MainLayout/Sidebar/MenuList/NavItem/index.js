@@ -1,14 +1,22 @@
 import React, { forwardRef, useEffect } from "react";
-import PropTypes from 'prop-types'
+import PropTypes from "prop-types";
 import { useDispatch, useSelector } from "react-redux";
 import { Link } from "react-router-dom";
 
-import { Avatar, Chip, ListItemButton, ListItemIcon, ListItemText, Typography, useMediaQuery } from "@mui/material";
+import {
+  Avatar,
+  Chip,
+  ListItemButton,
+  ListItemIcon,
+  ListItemText,
+  Typography,
+  useMediaQuery,
+} from "@mui/material";
 import { useTheme } from "@mui/material/styles";
 
 import FiberManualRecordIcon from "@mui/icons-material/FiberManualRecord";
 
-import { MENU_OPEN, SET_MENU } from "../../../../../store/actions";
+import { actionTypes } from "../../../../../store/constant";
 
 const NavItem = ({ item, level }) => {
   const theme = useTheme();
@@ -48,8 +56,8 @@ const NavItem = ({ item, level }) => {
   }
 
   const itemHandler = (id) => {
-    dispatch({ type: MENU_OPEN, id });
-    if (matchesSM) dispatch({ type: SET_MENU, opened: false });
+    dispatch({ type: actionTypes.MENU_OPEN, id });
+    if (matchesSM) dispatch({ type: actionTypes.SET_MENU, opened: false });
   };
 
   useEffect(() => {
@@ -58,7 +66,7 @@ const NavItem = ({ item, level }) => {
       .split("/")
       .findIndex((id) => id === item.id);
     if (currentIndex > -1) {
-      dispatch({ type: MENU_OPEN, id: item.id });
+      dispatch({ type: actionTypes.MENU_OPEN, id: item.id });
     }
   }, []);
 
@@ -77,17 +85,31 @@ const NavItem = ({ item, level }) => {
       selected={customization.isOpen.findIndex((id) => id === item.id) > -1}
       onClick={() => itemHandler(item.id)}
     >
-      <ListItemIcon sx={{my: 'auto', minWidth: !item?.icon ? 18 : 36}}>{itemIcon}</ListItemIcon>
+      <ListItemIcon sx={{ my: "auto", minWidth: !item?.icon ? 18 : 36 }}>
+        {itemIcon}
+      </ListItemIcon>
       <ListItemText
         primary={
-          <Typography variant={customization.isOpen.findIndex((id) => id === item.id) > -1 ? 'h5' : 'body1'} color="inherit">
+          <Typography
+            variant={
+              customization.isOpen.findIndex((id) => id === item.id) > -1
+                ? "h5"
+                : "body1"
+            }
+            color="inherit"
+          >
             {item.title}
           </Typography>
         }
         secondary={
           item.caption && (
-            <Typography veriant="caption" sx={{...theme.typography.subMenuCaption }} display="block" gutterBottom >
-              { item.caption}
+            <Typography
+              veriant="caption"
+              sx={{ ...theme.typography.subMenuCaption }}
+              display="block"
+              gutterBottom
+            >
+              {item.caption}
             </Typography>
           )
         }
@@ -107,7 +129,7 @@ const NavItem = ({ item, level }) => {
 
 NavItem.propTypes = {
   item: PropTypes.object,
-  level: PropTypes.number
-}
+  level: PropTypes.number,
+};
 
 export default NavItem;
