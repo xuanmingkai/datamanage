@@ -158,6 +158,11 @@ const UserManagement = () => {
 
   return (
     <Container maxWidth="lg" sx={{ mt: 4, mb: 4 }}>
+      <Stack justifyContent="center" alignItems="flex-end" >
+        <Button variant="contained" disableElevation href='/pages/register'>
+          Add User
+        </Button>
+      </Stack>
       <TableContainer component={Paper}>
         <Table sx={{ minWidth: 300 }} aria-label="custom pagination table">
           <TableHead>
