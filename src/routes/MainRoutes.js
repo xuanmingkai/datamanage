@@ -9,6 +9,7 @@ const UtilsTypography = Loadable(lazy(() => import('../views/utilities/Typograph
 const UtilsTablerIcons = Loadable(lazy(() => import('../views/utilities/TablerIcons')))
 
 const ImportFile = Loadable(lazy(() => import('../views/pages/interface/ImportFile')))
+const UserManagement = Loadable(lazy(() => import('../views/pages/management/UserManagement')))
 
 const MainRoutes = {
   path: "/",
@@ -33,6 +34,10 @@ const MainRoutes = {
         {
           path: "import-file",
           element: <ImportFile />,
+        },
+        {
+          path: "user-management",
+          element: <UserManagement />,
         }
       ],
     },

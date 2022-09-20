@@ -1,6 +1,6 @@
-import { IconKey, IconDatabaseImport } from "@tabler/icons";
+import { IconKey, IconDatabaseImport, IconUsers } from "@tabler/icons";
 
-const icons = { IconKey, IconDatabaseImport };
+const icons = { IconKey, IconDatabaseImport, IconUsers };
 
 const pages = {
   id: "pages",
@@ -13,6 +13,14 @@ const pages = {
       type: "item",
       url: "/pages/import-file",
       icon: icons.IconDatabaseImport,
+      breadcrumbs: false,
+    },
+    {
+      id: "userlist",
+      title: "User List",
+      type: "item",
+      url: "/pages/user-management",
+      icon: icons.IconUsers,
       breadcrumbs: false,
     },
     {
