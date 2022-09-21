@@ -43,6 +43,14 @@ const ProfileSection = () => {
   const [selectedIndex, setSelectedIndex] = useState(-1);
   const [open, setOpen] = useState(false);
 
+  const user = JSON.parse(localStorage.getItem("user"));
+  const [UserName, setUserName] = useState();
+  useEffect(() => {
+    if (user.firstName || user.lastName) {
+    var userName = user.firstName + " " + user.lastName;
+    setUserName(userName);
+    }
+  }, [user]);
   // anchorRef is used on different componets and specifying on type
   // leads to other componets throwing an error
 
@@ -162,16 +170,16 @@ const ProfileSection = () => {
                 >
                   <Box sx={{ p: 2 }}>
                     <Stack>
-                      <Stack direction="row" spacing={0.5} alignItems="center">
-                        <Typography variant="h4">Good Morning,</Typography>
+                      <Stack direction="row" spacing={0.5} justifyContent="center" alignItems="flex-end">
+                        <Typography variant="h3">Good Morning,</Typography>
                         <Typography
                           compoent="span"
-                          variant="h4"
+                          variant="h3"
                           sx={{
                             fontWeight: 400,
                           }}
                         >
-                          John Doe
+                          {UserName}
                         </Typography>
                       </Stack>
                     </Stack>
