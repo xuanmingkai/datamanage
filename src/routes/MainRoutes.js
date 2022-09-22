@@ -1,15 +1,27 @@
-import React, { lazy } from 'react'
+import React, { lazy } from "react";
 
-import MainLayout from '../layout/MainLayout'
-import Loadable from '../ui-component/Loadable'
+import MainLayout from "../layout/MainLayout";
+import Loadable from "../ui-component/Loadable";
 
-const DashboardDefault = Loadable(lazy(() => import('../views/dashboard/Default')))
+const DashboardDefault = Loadable(
+  lazy(() => import("../views/dashboard/Default"))
+);
 
-const UtilsTypography = Loadable(lazy(() => import('../views/utilities/Typography')))
-const UtilsTablerIcons = Loadable(lazy(() => import('../views/utilities/TablerIcons')))
+const UtilsTypography = Loadable(
+  lazy(() => import("../views/utilities/Typography"))
+);
+const UtilsColor = Loadable(
+  lazy(() => import("../views/utilities/Color")));
+const UtilsTablerIcons = Loadable(
+  lazy(() => import("../views/utilities/TablerIcons"))
+);
 
-const ImportFile = Loadable(lazy(() => import('../views/pages/interface/ImportFile')))
-const UserManagement = Loadable(lazy(() => import('../views/pages/management/UserManagement')))
+const ImportFile = Loadable(
+  lazy(() => import("../views/pages/interface/ImportFile"))
+);
+const UserManagement = Loadable(
+  lazy(() => import("../views/pages/management/UserManagement"))
+);
 
 const MainRoutes = {
   path: "/",
@@ -38,7 +50,7 @@ const MainRoutes = {
         {
           path: "user-management",
           element: <UserManagement />,
-        }
+        },
       ],
     },
     {
@@ -47,6 +59,15 @@ const MainRoutes = {
         {
           path: "util-typography",
           element: <UtilsTypography />,
+        },
+      ],
+    },
+    {
+      path: "utils",
+      children: [
+        {
+          path: "util-color",
+          element: <UtilsColor />,
         },
       ],
     },
