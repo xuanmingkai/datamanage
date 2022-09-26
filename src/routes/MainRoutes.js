@@ -22,6 +22,7 @@ const ImportFile = Loadable(
 const UserManagement = Loadable(
   lazy(() => import("../views/pages/management/UserManagement"))
 );
+const UserProfile1 = Loadable(lazy(() => import("../views/pages/user/UserProfile1")))
 
 const MainRoutes = {
   path: "/",
@@ -59,6 +60,20 @@ const MainRoutes = {
         {
           path: "util-typography",
           element: <UtilsTypography />,
+        },
+      ],
+    },
+    {
+      path: "user",
+      children: [
+        {
+          path: "account-profile",
+          children: [
+            {
+              path: "profile1",
+              element: <UserProfile1 />,
+            },
+          ],
         },
       ],
     },
