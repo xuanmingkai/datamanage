@@ -47,8 +47,8 @@ const ProfileSection = () => {
   const [UserName, setUserName] = useState();
   useEffect(() => {
     if (user.firstName || user.lastName) {
-    var userName = user.firstName + " " + user.lastName;
-    setUserName(userName);
+      var userName = user.firstName + " " + user.lastName;
+      setUserName(userName);
     }
   }, [user]);
   // anchorRef is used on different componets and specifying on type
@@ -67,12 +67,12 @@ const ProfileSection = () => {
     setOpen(false);
   };
 
-  const handleListItemClick = (event, index, route = "") => {
+  const handleListItemClick = (event, index, route = "", id) => {
     setSelectedIndex(index);
     handleClose(event);
 
     if (route && route !== "") {
-      navigate(route);
+      navigate(route, { state: { userid: id } });
     }
   };
 
@@ -170,7 +170,12 @@ const ProfileSection = () => {
                 >
                   <Box sx={{ p: 2 }}>
                     <Stack>
-                      <Stack direction="row" spacing={0.5} justifyContent="center" alignItems="flex-end">
+                      <Stack
+                        direction="row"
+                        spacing={0.5}
+                        justifyContent="center"
+                        alignItems="flex-end"
+                      >
                         <Typography variant="h3">Good Morning,</Typography>
                         <Typography
                           compoent="span"
@@ -277,7 +282,8 @@ const ProfileSection = () => {
                             handleListItemClick(
                               event,
                               0,
-                              "/user/account-profile/profile1"
+                              "/user/account-profile/profile1",
+                              user.id
                             )
                           }
                         >

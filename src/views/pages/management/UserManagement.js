@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from "react";
 import { useSelector, useDispatch } from "react-redux";
+import { useNavigate } from "react-router-dom";
 import PropTypes from "prop-types";
 
 import { styled, useTheme } from "@mui/material/styles";
@@ -120,6 +121,7 @@ const UserManagement = () => {
   const [rows, setRows] = useState([]);
   const items = useSelector((state) => state.users.items);
   const dispatch = useDispatch();
+  const navigate = useNavigate();
 
   useEffect(() => {
     dispatch(userActions.getAll);
@@ -144,7 +146,7 @@ const UserManagement = () => {
   };
 
   const handleCheckUserInfo = (id) => {
-    console.log("CheckUserInfo " + id);
+    navigate("/user/account-profile/profile1/", { state: { userid: id } });
   };
 
   const handleEditUser = (id) => {
@@ -158,8 +160,8 @@ const UserManagement = () => {
 
   return (
     <Container maxWidth="lg" sx={{ mt: 4, mb: 4 }}>
-      <Stack justifyContent="center" alignItems="flex-end" >
-        <Button variant="contained" disableElevation href='/pages/register'>
+      <Stack justifyContent="center" alignItems="flex-end">
+        <Button variant="contained" disableElevation href="/pages/register">
           Add User
         </Button>
       </Stack>

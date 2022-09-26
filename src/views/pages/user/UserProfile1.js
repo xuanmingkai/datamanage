@@ -1,4 +1,5 @@
-import React, { useState, useLayoutEffect } from "react";
+import React, { useState, useEffect, useLayoutEffect } from "react";
+import { useLocation } from "react-router-dom";
 
 import {
   Box,
@@ -49,8 +50,7 @@ const Profile1 = (user) => (
                   InputProps={{
                     readOnly: true,
                   }}
-                  defaultValue={user.user.firstName}
-                  value={user.user.firstName}
+                  value={user.user.firstName || ""}
                   fullWidth
                 />
               </Grid>
@@ -61,8 +61,7 @@ const Profile1 = (user) => (
                   InputProps={{
                     readOnly: true,
                   }}
-                  defaultValue={user.user.lastName}
-                  value={user.user.lastName}
+                  value={user.user.lastName || ""}
                   fullWidth
                 />
               </Grid>
@@ -73,8 +72,7 @@ const Profile1 = (user) => (
                   InputProps={{
                     readOnly: true,
                   }}
-                  defaultValue={user.user.username}
-                  value={user.user.username}
+                  value={user.user.username || ""}
                   fullWidth
                 />
               </Grid>
@@ -85,8 +83,7 @@ const Profile1 = (user) => (
                   InputProps={{
                     readOnly: true,
                   }}
-                  defaultValue={user.user.email}
-                  value={user.user.email}
+                  value={user.user.email || ""}
                   fullWidth
                 />
               </Grid>
@@ -146,21 +143,37 @@ const UserProfile1 = () => {
   const localuser = JSON.parse(localStorage.getItem("user"));
   const localusers = JSON.parse(localStorage.getItem("users"));
   const [user, setUser] = useState({});
+  const location = useLocation();
+  const [id, setId] = useState();
 
   useLayoutEffect(() => {
-    localusers.map((u) => {
-      if (u.id === localuser.id) {
-        var tmp = {
-          firstName: u.firstName,
-          lastName: u.lastName,
-          username: u.username,
-          email: u.email,
-        };
-        setUser(tmp);
-        
+    localusers.map((user) => {
+      if (localuser.id === user.id) {
+        setId(user.id);
       }
     });
   }, []);
+
+  useEffect(() => {
+    var id = location.state?.userid;
+    if (!id) return;
+    setId(id);
+  }, [location]);
+
+  useEffect(() => {
+    if (!id) return;
+    localusers.map((user) => {
+      if (id === user.id) {
+        var userInfo = {
+          firstName: user.firstName,
+          lastName: user.lastName,
+          username: user.username,
+          email: user.email,
+        };
+        setUser(userInfo);
+      }
+    });
+  }, [id]);
 
   return user && <Profile1 user={user} />;
 };
