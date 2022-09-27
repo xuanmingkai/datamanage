@@ -1,6 +1,20 @@
-import { IconKey, IconDatabaseImport, IconUsers, IconDatabase, IconSettings} from "@tabler/icons";
+import {
+  IconKey,
+  IconDatabaseImport,
+  IconUsers,
+  IconDatabase,
+  IconSettings,
+  IconSubtask,
+} from "@tabler/icons";
 
-const icons = { IconKey, IconDatabaseImport, IconUsers, IconDatabase, IconSettings };
+const icons = {
+  IconKey,
+  IconDatabaseImport,
+  IconUsers,
+  IconDatabase,
+  IconSettings,
+  IconSubtask,
+};
 
 const pages = {
   id: "pages",
@@ -19,6 +33,35 @@ const pages = {
           type: "item",
           url: "/pages/import-file",
           icon: icons.IconDatabaseImport,
+          breadcrumbs: false,
+        },
+      ],
+    },
+    {
+      id: "task-control",
+      title: "TaskControl",
+      type: "collapse",
+      icon: icons.IconSubtask,
+      children: [
+        {
+          id: "task-dashboard",
+          title: "Dashboard",
+          type: "item",
+          url: "/tasks/dashboard",
+          breadcrumbs: false,
+        },
+        {
+          id: "task-deployment",
+          title: "Deployment",
+          type: "item",
+          url: "/tasks/deployment",
+          breadcrumbs: false,
+        },
+        {
+          id: "task-management",
+          title: "Management",
+          type: "item",
+          url: "/tasks/mangement",
           breadcrumbs: false,
         },
       ],
