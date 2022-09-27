@@ -1,6 +1,6 @@
-import { IconKey, IconDatabaseImport, IconUsers } from "@tabler/icons";
+import { IconKey, IconDatabaseImport, IconUsers, IconDatabase, IconSettings} from "@tabler/icons";
 
-const icons = { IconKey, IconDatabaseImport, IconUsers };
+const icons = { IconKey, IconDatabaseImport, IconUsers, IconDatabase, IconSettings };
 
 const pages = {
   id: "pages",
@@ -8,20 +8,36 @@ const pages = {
   type: "group",
   children: [
     {
-      id: "importfile",
-      title: "Import File",
-      type: "item",
-      url: "/pages/import-file",
-      icon: icons.IconDatabaseImport,
-      breadcrumbs: false,
+      id: "datasources",
+      title: "DataBase",
+      type: "collapse",
+      icon: icons.IconDatabase,
+      children: [
+        {
+          id: "importfile",
+          title: "Import File",
+          type: "item",
+          url: "/pages/import-file",
+          icon: icons.IconDatabaseImport,
+          breadcrumbs: false,
+        },
+      ],
     },
     {
-      id: "userlist",
-      title: "User List",
-      type: "item",
-      url: "/pages/user-management",
-      icon: icons.IconUsers,
-      breadcrumbs: false,
+      id: "system-mangement",
+      title: "Management",
+      type: "collapse",
+      icon: icons.IconSettings,
+      children: [
+        {
+          id: "userlist",
+          title: "User List",
+          type: "item",
+          url: "/pages/user-management",
+          icon: icons.IconUsers,
+          breadcrumbs: false,
+        },
+      ],
     },
     {
       id: "authentication",
