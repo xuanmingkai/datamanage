@@ -15,6 +15,7 @@ const UtilsColor = Loadable(
 const UtilsTablerIcons = Loadable(
   lazy(() => import("../views/utilities/TablerIcons"))
 );
+const UtilsShadow = Loadable(lazy(() => import("../views/utilities/Shadow")))
 
 const ImportFile = Loadable(
   lazy(() => import("../views/pages/interface/ImportFile"))
@@ -60,6 +61,15 @@ const MainRoutes = {
         {
           path: "util-typography",
           element: <UtilsTypography />,
+        },
+      ],
+    },
+    {
+      path: "utils",
+      children: [
+        {
+          path: "util-shadow",
+          element: <UtilsShadow />,
         },
       ],
     },
