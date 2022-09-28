@@ -74,7 +74,7 @@ const pages = {
       children: [
         {
           id: "userlist",
-          title: "User List",
+          title: "Manage User",
           type: "item",
           url: "/pages/user-management",
           icon: icons.IconUsers,
