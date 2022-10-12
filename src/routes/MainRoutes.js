@@ -28,6 +28,9 @@ const UserManagement = Loadable(
 const UserProfile1 = Loadable(
   lazy(() => import("../views/pages/user/UserProfile1"))
 );
+const TaskDashboard = Loadable(
+  lazy(() => import("../views/pages/tasks/TaskDashboard"))
+);
 
 const MainRoutes = {
   path: "/",
@@ -56,6 +59,15 @@ const MainRoutes = {
         {
           path: "user-management",
           element: <UserManagement />,
+        },
+      ],
+    },
+    {
+      path: "tasks",
+      children: [
+        {
+          path: "dashboard",
+          element: <TaskDashboard />,
         },
       ],
     },
