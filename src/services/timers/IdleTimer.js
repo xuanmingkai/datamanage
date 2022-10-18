@@ -1,8 +1,8 @@
 import React, { useEffect } from "react";
 import { useLocation } from "react-router-dom";
-import { useDispatch } from 'react-redux'
+import { useDispatch } from "react-redux";
 
-import {actionTypes} from '../../store/constant'
+import { actionTypes } from "../../store/constant";
 
 const whitelist = ["/", "/admin", "/results", "/profile"];
 
@@ -10,10 +10,10 @@ const IdleTimer = () => {
   const location = useLocation();
   let timeout;
 
-  const dispatch = useDispatch()
+  const dispatch = useDispatch();
 
   const goBackToHome = () => {
-    dispatch({type: actionTypes.STATUS_TIMER, statusTimer: true})
+    dispatch({ type: actionTypes.STATUS_TIMER, statusTimer: true });
   };
 
   const restartAutoReset = () => {
@@ -58,4 +58,4 @@ const IdleTimer = () => {
   return <div />;
 };
 
-export default IdleTimer
+export default IdleTimer;
