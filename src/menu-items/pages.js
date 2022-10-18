@@ -5,6 +5,8 @@ import {
   IconDatabase,
   IconSettings,
   IconSubtask,
+  IconArrowDownRightCircle,
+  IconChevronDown,
 } from "@tabler/icons";
 
 const icons = {
@@ -14,6 +16,8 @@ const icons = {
   IconDatabase,
   IconSettings,
   IconSubtask,
+  IconArrowDownRightCircle,
+  IconChevronDown,
 };
 
 const pages = {
@@ -22,7 +26,7 @@ const pages = {
   type: "group",
   children: [
     {
-      id: "datasources",
+      id: "database",
       title: "DataBase",
       type: "collapse",
       icon: icons.IconDatabase,
@@ -62,6 +66,22 @@ const pages = {
           title: "Management",
           type: "item",
           url: "/tasks/mangement",
+          breadcrumbs: false,
+        },
+      ],
+    },
+    {
+      id: "data-source",
+      title: "DataSource",
+      type: "collapse",
+      icon: icons.IconArrowDownRightCircle,
+      children: [
+        {
+          id: "fofa-data-source",
+          title: "Soruce-Fofa",
+          type: "item",
+          url: "/pages/source-fofa",
+          icon: icons.IconChevronDown,
           breadcrumbs: false,
         },
       ],
