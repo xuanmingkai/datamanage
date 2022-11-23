@@ -19,7 +19,7 @@ const CardWrapper = styled(MainCard)(({ theme }) => ({
   position: "relative",
 }));
 
-const TotalCard = ({ isLoading, TotalType }) => {
+const TotalCard = ({ isLoading, TotalType, TotalResult }) => {
   const theme = useTheme();
 
   return (
@@ -67,7 +67,9 @@ const TotalCard = ({ isLoading, TotalType }) => {
                           </Typography>
                         </Grid>
                         <Grid item>
-                          <Typography align="center">222</Typography>
+                          <Typography align="center">
+                            {TotalResult.total}
+                          </Typography>
                         </Grid>
                       </Grid>
                     )}
@@ -81,7 +83,9 @@ const TotalCard = ({ isLoading, TotalType }) => {
                           </Typography>
                         </Grid>
                         <Grid item>
-                          <Typography align="center">111</Typography>
+                          <Typography align="center">
+                            {TotalResult.online}
+                          </Typography>
                         </Grid>
                       </Grid>
                     )}
@@ -95,7 +99,9 @@ const TotalCard = ({ isLoading, TotalType }) => {
                           </Typography>
                         </Grid>
                         <Grid item>
-                          <Typography align="center">222</Typography>
+                          <Typography align="center">
+                            {TotalResult.offline}
+                          </Typography>
                         </Grid>
                       </Grid>
                     )}
@@ -113,6 +119,7 @@ const TotalCard = ({ isLoading, TotalType }) => {
 TotalCard.propTypes = {
   isLoading: PropTypes.bool,
   TotalType: PropTypes.number,
+  TotalResult: PropTypes.object,
 };
 
 export default TotalCard;

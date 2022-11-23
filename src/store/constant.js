@@ -7,7 +7,8 @@ export var actionTypes = {
   MENU_OPEN: "@customization/MENU_OPEN",
   SET_FONT_FAMILY: "@customization/SET_FONT_FAMILY",
   SET_BOARDER_RADIUS: "@customization/SET_BOARDER_RADIUS",
-  STATUS_TIMER: '@customization/STATUS_TIMER'
+  STATUS_TIMER: '@customization/STATUS_TIMER',
+  UPDATE_TIMER: '@customization/STATUS_TIMER'
 };
 
 export var NodeTypes = {
